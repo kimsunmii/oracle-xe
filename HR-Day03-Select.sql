@@ -1,102 +1,101 @@
 /*
-���ϸ� :HR-Day03-Select.sql
-SQL (Structured Query Language -������ ���� ���
-    ������ �����ͺ��̽� �ý���(RDBMS)���� �ڷḦ ���� �� ó���ϱ� ���� ����� ���
-    SELECT ��
-    �����ͺ��̽����� ���� �˻�
+파일명 :HR-Day03-Select.sql
+SQL(Structured Query Language - 구조적 질의 언어)
+    관계형 데이터베이스 시스템(RDBMS)에서 데이터를 관리하고 처리하기 위해
+    SELECT 문
+    데이터베이스에서 정보 검색
 */
 
--- ��翭 ����*
-SELECT *
-FROM departments;
+-- 모든 열 선택*
+선택  *
+부서에서 ;
 
 
---Ư�� �� ����
-SELECT departmernt_id, lacation_id
-FROM departmernts;
+-- 특정 열 선액
+SELECT 부서_id, lacation_id
+부서에서 ;
 
-/* ��� �����ڸ� ����ؼ� ���� /��¥ ������ ǥ���� �ۼ�
-
-+ ���ϱ�
-- ����
-* ���ϱ�
-/ ������ 
+/* 산술 옆을 사용해서 숫자 /날짜데이터 작성
++ 더하기
+- 빼기
+* 곱하기
+/어셈기
 */
 
 
 
--- ��� ������ ���
-SELECT LAST_NAME, SALARY, SALARY + 300
-FROM employees;
+-- 산술 옆에서 사용
+LAST_NAME, SALARY, SALARY +  300 선택
+직원 으로부터
 
 
 /* 
-������ �켱����
-���ϱ�� ������� ���ϱ� ���⺸�ٴ� ���� ����
+옆에 먼저 순위
+곱하기와 추측기는 더하기 빼기보다는 먼저 수행
 */
 
-SELECT last_name, salary, 12*salary+100
-FROM employees;
+SELECT last_name, 급여, 12 * 급여 + 100
+직원 으로부터
 
-SELECT last_name, salary, 12*salary+100
-FROM employees;
+SELECT last_name, 급여, 12 * 급여 + 100
+직원 으로부터
 
 /* 
-������� Nullrjqt
-null ���� �����ϴ� ������� null�� ���
+산술식의 Nullrjqt
+null 값을 포함하는 산술식은 null로 계산
 */
 
-SELECT last_name, 12*salary*comission_pct, salary, commission_pct
-FROM employees;
+SELECT last_name, 12 * 급여 * comission_pct, 급여, 커미션_pct
+직원 으로부터
 
 
 /*
-�� alias ����
-    �� �Ӹ����� �̸��� �ٲߴϴ�.
-    ��꿡�� �����մϴ�.
-    �� �̸� �ٷ� �ڿ� ���ɴϴ�. ( �� �̸��� alias ���̿� ���� ������ As Ű���尡 �ü��� �ֽ��ϴ�.)
-    �����̳� Ư�� ���ڸ� �����ϰų� ��ҹ��ڸ� �����ϴ� ��� ū ����ǥ�� �ʿ��մϴ�.
+열 별칭
+    열 머리글의 이름을 바꿉니다.
+    계산에서 유용합니다.
+    열 이름 바로 가기 (열 이름과 별칭 사이에 선택 사항인 키워드가 올수도 있습니다.)
+    공백이나 특수 문자를 포함하거나 대소문자를 구분하는 경우 큰 따음표가 필요합니다.
     
     */
-    SELECT last_name As name, comission_pct comn, salary *10as �޿� 10��
-    FROM employees;
+    SELECT last_name As name, comission_pct comn, salary * 10as 업데이트 10 배
+    직원 으로부터
     
-    SELECT last_name "Name", salary*qw "Annual salary"
-    FROM employees;
+    SELECT last_name " 이름 " , 급여 * qw " 연봉 "
+    직원 으로부터
     
     /*
-    ���� ������
-        ���̳� ���ڿ��� �ٸ� ���� �����մϴ�.
-        �ΰ��� ���μ� (||) ���� ��Ÿ���ϴ�.
-        ��� ���� ���� ǥ������ �ۼ��մϴ�.
+    옆접속
+        열이나 문자열을 다른 열에 연결합니다.
+        유방의 입체선(||)으로 표현합니다.
+        결과 열로 문자 요약을 작성합니다.
     */
     
-    SELECT last_name||job AS "Employees" ,last_name, job_id 
-    FROM employees;
-    
-    
-    /*
-    ���ͷ� ���ڿ�
-    ���ͷ��� SELECT ���� ���Ե� ����, ���� �Ǵ� ��¥�Դϴ�. 
-    ��¥ �� ���� ���Ƿ� ���� ���� ����ǥ�� ������մϴ�.
-    �� ���ڿ��� ��ȯ�Ǵ� �� ���� �ѹ� ��µǺ�ϴ�.
-    */
-    
-    SELECT last_name || 'is a' || job_id AS "Employee Details"
-    FROM employees;
+    성 을 선택 || 작업 AS  " 직원 " , 성, 작업 ID
+    직원 으로부터
     
     
     /*
-    ��ü ����(q) ������
-    �ڽ��� ����ǥ �����ڸ� �����մϴ�.
-    �����ڸ� ���Ƿ� �����մϴ�.
-    ������ �� ��뼺�� �����մϴ�.
+    엘럴 문자열
+    엘럴은 SELECT 문에 포함된 문자, 숫자 또는 날짜입니다.
+    날짜 및 문자 리피럴 같은 작은 따음표로 묶어야 합니다.
+    각 문자열은 반환되는 각 형에 한 번 출력됩니다.
+    */
+    
+    성 을  선택 || ' 는 '  || job_id AS  " 직원 세부 정보 "
+    직원 으로부터
+    
+    
+    /*
+    역인음(q) 가까이
+    자신의 따음표를 구분합니다.
+    사용자 임의로 선택합니다.
+    가독성 및 사용성이 증가합니다.
     
     
     */
     
-    SELECT department_name || q'[Department's Manager Id : J] ' || manager_id
-    AS "Department and Manager"
-    FROM departments;
+    SELECT 부서 _이름 || q ' [부서 의 관리자 ID : J] ' || manager_id
+    AS "부서 및 관리자"
+    부서에서;
     
     
