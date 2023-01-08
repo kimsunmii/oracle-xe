@@ -62,3 +62,61 @@ EXCEPTION
 
 END; -- 작업종료
 /
+
+
+/*
+프로시저
+[기본구조]
+CREATE OR REPLACE PROCEDURE 프로시져 이름 (파라미터1, 파라미터2...);
+    IS [As]
+    선언부
+    BEGIN
+    [실행부 - PL/SQL BLOCK]
+    
+    [EXCEPTION]
+    
+    [EXCEPTION 처리]
+    END;
+*/
+--프로시저 :이름, 매개변수, 변환값(x)
+CREATE OR REPLACE PROCEDURE print_hello_proc --매개변수가 없으면() 생략
+IS
+msg VARCHAR2(20) := 'hello world'; --변수 초기값 선언
+BEGIN --문장의 시작
+    DBMS OUTPUT.PUT_LINE(msg);
+    END ; --문장의 끝
+    -- 프로시저 종료
+    EXEC print_hello_proc;
+    
+    --IN 매개변수
+    CREATE OR REPLACE PROCEDURE update_emp_salary_proc(eno IN NUMBER) IS
+        BEGIN
+        UPDATE emp SET salary = salary*1.1
+        WHERE employee_id = eno;
+        COMMIT;
+        END;
+        
+    --3100
+    --3400
+    SELECT*FROM emp2
+    WHERE employee_id = 115;
+    
+    EXEC update_emp2_salary_proc(115);
+    
+    --out 매개변수
+CREATE OR REPLACE PROCEDURE find_emp2_proc(v eno IN NUMBER,
+    v_fname OUT NVARCHAR2, v_lname OUT NVARCHAR2, v_sal OUT NUMBER
+    IS
+    BEGIN
+        SELECT first_name, last_name, salary
+        INTO v_fname, v_lname, v_sal
+        FROM emp2 WHERE employee_id = v_eno;
+    END;
+    
+    VARIABLE v_fname NVARCHAR2(25);
+    VARIABLE v_lname NVARCHAR2(25);
+    VARIABLE v_sal NUMBER(8,2);
+    
+    EXECUTE find_emp2_proc(115, :v_fname, :v_lname, :v_sal);
+    PRINT v_fname;
+    
